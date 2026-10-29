@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Halloween Челлендж 2026</title>
+    <!-- Подключаем шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: #ff6a00;
+            --secondary-glow: #b200ff;
+            --emerald-glow: #00ffaa;
+            --gold-glow: #ffd700;
+            --bg-color: #0b0c10;
+            --text-light: #f5f5f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            overflow: hidden; 
+            color: var(--text-light);
+            position: relative;
+        }
+
+        /* --- СЛОИ ПЛАВНО СМЕНЯЮЩЕГОСЯ ФОНА --- */
+        .bg-layer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-layer.active {
+            opacity: 1;
+        }
+
+        .container {
+            text-align: center; 
+            position: relative;
+            z-index: 2; 
+            padding: 20px; 
+            width: 100%; 
+            max-width: 800px;
+        }
+
+        /* --- ЭКРАН 1 (Стартовый) --- */
+        #screen-1 { transition: opacity 0.5s ease; }
+
+        h1 {
+            font-family: 'Amatic SC', cursive; font-size: clamp(3.5rem, 10vw, 6rem);
+            letter-spacing: 3px; margin-bottom: clamp(1.5rem, 5vw, 3rem); color: #fff;
+            text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
+            animation: float 3s ease-in-out infinite; line-height: 1.1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)); }
+            50% { filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.95)); }
+        }
+
+        /* Универсальный класс магического свечения */
+        .magic-element {
+            background: linear-gradient(45deg, #ff6a00, #ff0055, #b200ff);
+            background-size: 200% 200%; border: 2px solid rgba(255,255,255,0.4); border-radius: 50px;
+            color: white; font-family: 'Nunito', sans-serif; font-weight: 700;
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.7);
+            animation: gradientMove 3s ease infinite, pulseGlow 2s infinite;
+            transition: all 0.3s ease; position: relative;
+        }
+
+        /* Кнопка портала без переноса строк */
+        .portal-btn {
+            font-size: clamp(0.95rem, 3.8vw, 1.35rem);
+            padding: clamp(14px, 2.5vw, 18px) clamp(22px, 4vw, 42px);
+            cursor: pointer;
+            width: auto;
+            max-width: 95%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .portal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(178, 0, 255, 0.9), 0 0 20px var(--primary-glow);
+            border-color: #fff;
+        }
+
+        /* Кнопки перехода квеста */
+        .quest-next-btn {
+            background: linear-gradient(45deg, #008f5d, #00c896, #8000ff);
+            background-size: 200% 200%;
+            border: 2px solid rgba(0, 255, 170, 0.7);
+            color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1rem, 3.2vw, 1.25rem);
+            font-weight: 800;
+            padding: 15px 34px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: gradientMove 3s ease infinite;
+        }
+        .quest-next-btn .arrow-glyph {
+            font-size: 1.3rem; transition: transform 0.3s ease; color: #00ffaa; text-shadow: 0 0 8px #00ffaa;
+        }
+        .quest-next-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 0 35px rgba(0, 255, 170, 0.8), 0 0 25px rgba(178, 0, 255, 0.8);
+            border-color: #fff;
+        }
+        .quest-next-btn:hover .arrow-glyph { transform: translateX(6px); }
+
+        /* Поле ввода для ответа */
+        .magic-input {
+            width: 100%;
+            max-width: 400px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            padding: 15px 30px;
+            outline: none;
+            text-align: center;
+            margin: 10px auto 16px auto;
+            display: block;
+        }
+        .magic-input::placeholder { color: rgba(255, 255, 255, 0.75); }
+        .magic-input:focus { transform: scale(1.02); box-shadow: 0 0 35px rgba(178, 0, 255, 0.9); border-color: #fff; }
+
+        /* --- АНИМАЦИЯ «ДЫХАНИЯ» ДЛЯ КНОПКИ ОТВЕТА --- */
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 170, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+                border-color: rgba(0, 255, 170, 0.65);
+            }
+            50% {
+                transform: scale(1.038);
+                box-shadow: 0 0 38px rgba(0, 255, 170, 0.75), 0 0 22px rgba(178, 0, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.35);
+                border-color: rgba(255, 255, 255, 0.9);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 170, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+                border-color: rgba(0, 255, 170, 0.65);
+            }
+        }
+
+        /* Кнопка "Отправить ответ" (с эффектом дыхания) */
+        .answer-btn {
+            width: 100%;
+            max-width: 400px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 2px solid rgba(0, 255, 170, 0.7);
+            background: linear-gradient(45deg, #008f5d, #00c896, #8000ff);
+            background-size: 200% 200%;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: gradientMove 3s ease infinite, breathe 2.6s ease-in-out infinite;
+            transition: border-color 0.3s ease, background 0.3s ease, filter 0.3s ease;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin: 0 auto;
+        }
+
+        .answer-btn:hover {
+            animation-name: gradientMove;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 45px rgba(0, 255, 170, 0.9), 0 0 30px rgba(178, 0, 255, 0.85), inset 0 0 15px rgba(255, 255, 255, 0.4);
+            border-color: #fff;
+        }
+
+        .answer-btn:active { 
+            transform: translateY(0) scale(0.98); 
+            animation-name: gradientMove;
+        }
+
+        /* --- ЭКРАНЫ С ЗАДАНИЯМИ --- */
+        .quest-screen {
+            display: none; opacity: 0; transition: opacity 0.5s ease;
+            background: rgba(18, 8, 32, 0.68);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: clamp(20px, 5vw, 40px); border-radius: 24px;
+            border: 2px solid rgba(178, 0, 255, 0.45);
+            box-shadow: 0 0 35px rgba(178, 0, 255, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.05);
+            max-height: 90vh; overflow-y: auto;
+        }
+
+        .quest-title {
+            font-family: 'Amatic SC', cursive; font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #fff; margin-bottom: 20px; text-shadow: 0 0 15px var(--primary-glow); line-height: 1;
+        }
+
+        .quest-text {
+            font-size: clamp(1.1rem, 3vw, 1.3rem); line-height: 1.4; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Цветовые акценты */
+        .highlight { color: #00ffaa; font-weight: bold; text-shadow: 0 0 10px rgba(0, 255, 170, 0.5); font-size: 1.1em; }
+        .highlight-danger { color: #ff0055; font-weight: bold; text-shadow: 0 0 10px rgba(255, 0, 85, 0.5); font-size: 1.1em; }
+        .highlight-water { color: #00e5ff; font-weight: bold; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); font-size: 1.1em; }
+        .highlight-mirror { color: #e0f7fa; font-weight: bold; text-shadow: 0 0 10px rgba(224, 247, 250, 0.8); font-size: 1.1em; }
+        .highlight-dragon { color: #ffb300; font-weight: bold; text-shadow: 0 0 10px rgba(255, 179, 0, 0.8); font-size: 1.1em; }
+
+        .error-text { color: #ff0055; font-weight: bold; display: none; margin-top: 14px; animation: shake 0.4s; }
+        .success-block { display: none; margin-top: 25px; animation: fadeIn 0.5s; }
+        .success-text { color: #00ffaa; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 10px #00ffaa; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        .error-shake { animation: shake 0.4s; border-color: red !important; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); }
+        }
+
+        /* --- ФИНАЛЬНЫЙ ЭКРАН --- */
+        .final-screen {
+            border: 2px solid rgba(255, 215, 0, 0.6) !important;
+            background: rgba(18, 8, 32, 0.72) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            box-shadow: 0 0 45px rgba(255, 106, 0, 0.35), 0 0 70px rgba(178, 0, 255, 0.3) !important;
+            padding: clamp(25px, 5vw, 45px) 25px !important;
+        }
+
+        .final-badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.6);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .final-title {
+            font-family: 'Amatic SC', cursive;
+            font-size: clamp(3.8rem, 12vw, 6rem);
+            color: #fff;
+            margin-bottom: 4px;
+            line-height: 1;
+            text-shadow: 0 0 15px var(--gold-glow), 0 0 35px var(--primary-glow), 0 0 50px var(--secondary-glow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .celebration-emojis {
+            font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+            margin-bottom: 12px;
+            letter-spacing: 8px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        .final-desc {
+            font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+            line-height: 1.4;
+            color: #f0f0f0;
+            margin-bottom: 6px;
+        }
+
+        .final-subtext {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: #d1d1d1;
+            margin-bottom: 15px;
+        }
+
+        .final-artifact-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 15px auto 20px auto;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 125%; height: 125%;
+            background: radial-gradient(circle, rgba(255, 106, 0, 0.5) 0%, rgba(178, 0, 255, 0.4) 45%, transparent 70%);
+            filter: blur(28px);
+            z-index: 0;
+            pointer-events: none;
+            animation: pulseAmbient 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseAmbient {
+            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        .final-key-card {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(145deg, rgba(32, 14, 52, 0.9), rgba(12, 4, 22, 0.9));
+            border: 2px solid rgba(255, 215, 0, 0.75);
+            border-radius: 28px;
+            padding: 24px clamp(25px, 6vw, 60px);
+            box-shadow: 0 0 35px rgba(255, 106, 0, 0.4), inset 0 0 25px rgba(255, 215, 0, 0.15);
+            min-width: 280px;
+            max-width: 90vw;
+        }
+
+        .key-card-header {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffd700;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .key-digits {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: clamp(4.8rem, 16vw, 7rem);
+            line-height: 1.05;
+            letter-spacing: 6px;
+            background: linear-gradient(180deg, #ffffff 0%, #fff0b8 40%, #ff9d00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255, 179, 0, 0.7)) drop-shadow(0 0 40px rgba(255, 106, 0, 0.5));
+            margin: 6px 0 10px 0;
+        }
+
+        .key-card-footer {
+            font-size: 0.9rem;
+            color: #00ffaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
+        }
+
+        .final-treasure-hint {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- ВСПЛЫВАЮЩЕЕ ОКНО --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 10; padding: 15px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background: rgba(24, 10, 42, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid var(--primary-glow); border-radius: 24px; padding: clamp(25px, 6vw, 40px);
+            text-align: center; width: 100%; max-width: 450px;
+            box-shadow: 0 0 35px rgba(255, 106, 0, 0.45), inset 0 0 20px rgba(178, 0, 255, 0.2);
+            transform: translateY(50px); transition: transform 0.4s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-box h2 { font-family: 'Amatic SC', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: #fff; margin-bottom: 25px; text-shadow: 0 0 10px var(--secondary-glow); }
+        .modal-box input {
+            width: 100%; padding: 15px; font-size: 1.2rem; font-family: 'Nunito', sans-serif;
+            border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
+            background: rgba(0, 0, 0, 0.45); color: white; outline: none; margin-bottom: 20px; text-align: center; transition: all 0.3s;
+        }
+        .modal-box input:focus { border-color: var(--primary-glow); box-shadow: 0 0 15px var(--primary-glow); }
+        .submit-btn {
+            background: transparent; border: 2px solid var(--primary-glow); color: white; font-size: 1.2rem; padding: 12px 30px;
+            border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Nunito', sans-serif; font-weight: bold; width: 100%; max-width: 250px;
+        }
+        .submit-btn:hover { background: var(--primary-glow); box-shadow: 0 0 20px var(--primary-glow); }
+
+        #welcome-message { display: none; font-size: clamp(1.2rem, 4vw, 1.6rem); color: #00ffaa; text-shadow: 0 0 10px #00ffaa; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- Фоновые слои для плавного кроссфейда -->
+    <div id="bg-layer-a" class="bg-layer active"></div>
+    <div id="bg-layer-b" class="bg-layer"></div>
+
+    <div class="container">
+        
+        <!-- ЭКРАН 1: Вход -->
+        <div id="screen-1">
+            <h1 id="main-title">Halloween Челлендж 2026</h1>
+            <button class="magic-element portal-btn" id="portal-btn">✨ Вход в волшебный портал ✨</button>
+            <div id="welcome-message"></div>
+        </div>
+
+        <!-- ЭКРАН 2: Задание 1 -->
+        <div id="screen-2" class="quest-screen">
+            <h2 class="quest-title" id="quest-greeting">Привет, Имя!</h2>
+            <p class="quest-text">Все вокруг заколдовал злой Гоблинус. Тебе нужно расколдовать его чары. Для этого пройди все испытания и отгадай все загадки.</p>
+            <p class="quest-text">Направляйся в <span class="highlight">княжество Обедов</span>. Ты найдёшь там первое задание. Разгадай его и ответ запиши вот сюда ниже:</p>
+            
+            <div id="q1-input-area">
+                <input type="text" id="answer-input-1" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
+                <button class="answer-btn" id="check-answer-btn-1">✨ Отправить ответ ✦</button>
+                <p class="error-text" id="error-text-1">Неверно! Подумай ещё...</p>
+            </div>
+
+            <div id="success-block-1" class="success-block">
+                <p class="success-text">Молодец! Так держать!</p>
+                <button class="quest-next-btn" id="next-btn-1">
+                    <span>К следующей тайне ✦ 🔮</span>
+                    <span class="arrow-glyph">➔</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 3: Задание 2 -->
+        <div id="screen-3" class="quest-screen">
+            <h2 class="quest-title">Испытание второе</h2>
+            <p class="quest-text">Поздравляю! Ты прошел первое испытание! Но дальше будет страшнее.</p>
+            <p class="quest-text">Поэтому сейчас непременно направляйся в <span class="highlight-danger">обитель нечисти</span>. Берегись, иногда там плохо пахнет и раздаются странные звуки... 👻</p>
+            <p class="quest-text">Направляйся туда и оставь всё лишнее. А ещё там ты найдёшь ответ на второе задание.</p>
+            
+            <div id="q2-input-area">
+                <input type="text" id="answer-input-2" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
+                <button class="answer-btn" id="check-answer-btn-2">✨ Отправить ответ ✦</button>
+                <p class="error-text" id="error-text-2">Ой, что-то не так. Ищи лучше!</p>
+            </div>
+
+            <div id="success-block-2" class="success-block">
+                <p class="success-text">Невероятно! Ты справился с нечистью!</p>
+                <button class="quest-next-btn" id="next-btn-2">
+                    <span>Шагнуть во тьму ✦ 🕯️</span>
+                    <span class="arrow-glyph">➔</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 4: Задание 3 -->
+        <div id="screen-4" class="quest-screen">
+            <h2 class="quest-title">Царство водяного</h2>
+            <p class="quest-text">Ты отлично справляешься. Теперь следующее задание!</p>
+            <p class="quest-text">В <span class="highlight-water">царстве водяного 🌊</span> тебе нужно найти <span class="highlight-danger">шифр Дракулы</span> и с помощью этого шифра разгадать секретное послание.</p>
+            
+            <div id="q3-input-area">
+                <input type="text" id="answer-input-3" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
+                <button class="answer-btn" id="check-answer-btn-3">✨ Отправить ответ ✦</button>
+                <p class="error-text" id="error-text-3">Шифр не поддаётся! Попробуй разгадать ещё раз.</p>
+            </div>
+
+            <div id="success-block-3" class="success-block">
+                <p class="success-text">Гениально! Послание разгадано!</p>
+                <button class="quest-next-btn" id="next-btn-3">
+                    <span>В Зазеркалье ✦ 🪞</span>
+                    <span class="arrow-glyph">➔</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 5: Задание 4 -->
+        <div id="screen-5" class="quest-screen">
+            <h2 class="quest-title">Зазеркалье</h2>
+            <p class="quest-text">Отправляйся в <span class="highlight-mirror">страну зеркал ✨</span>. В этот раз тебе придётся потрудиться и поискать секретное послание, а после того как найдёшь — подумать, как его разгадать.</p>
+            <p class="quest-text">В этом тебе поможет волшебный фонарик. Послание ты разглядишь в Зазеркалье.</p>
+            
+            <div id="q4-input-area">
+                <input type="text" id="answer-input-4" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
+                <button class="answer-btn" id="check-answer-btn-4">✨ Отправить ответ ✦</button>
+                <p class="error-text" id="error-text-4">Зеркало молчит. Попробуй другое слово!</p>
+            </div>
+
+            <div id="success-block-4" class="success-block">
+                <p class="success-text">Великолепно! Ты раскрыл секрет зеркал!</p>
+                <button class="quest-next-btn" id="next-btn-4">
+                    <span>В логово дракона ✦ 🐉</span>
+                    <span class="arrow-glyph">➔</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 6: Задание 5 -->
+        <div id="screen-6" class="quest-screen">
+            <h2 class="quest-title">Пещера дракона</h2>
+            <p class="quest-text">Ты почти у финиша! Отправляйся в <span class="highlight-dragon">пещеру дракона 🐉</span>. </p>
+            <p class="quest-text">Но не волнуйся, он добрый и спит, но его сон стерегут привидения. Вот они-то и будут возмущаться и шуметь, потому что ты отправляешься на охоту.</p>
+            <p class="quest-text">Это будет самая настоящая <span class="highlight">охота за привидениями 👻</span>!</p>
+            
+            <div id="q5-input-area">
+                <input type="text" id="answer-input-5" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
+                <button class="answer-btn" id="check-answer-btn-5">✨ Отправить ответ ✦</button>
+                <p class="error-text" id="error-text-5">Привидения смеются! Ответ неверный.</p>
+            </div>
+
+            <div id="success-block-5" class="success-block">
+                <p class="success-text">Ура! Все привидения пойманы!</p>
+                <button class="quest-next-btn" id="next-btn-5">
+                    <span>Открыть Замок Чудес ✦ 🗝️</span>
+                    <span class="arrow-glyph">➔</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 7: Финал -->
+        <div id="screen-7" class="quest-screen final-screen" style="text-align: center;">
+            <div class="final-badge">✦ ПРОКЛЯТИЕ ГОБЛИНУСА СНЯТО ✦</div>
+            <h2 class="final-title">🎉 ПОБЕДА! 🎉</h2>
+            <div class="celebration-emojis">✨ 🍁🍂🪾🏚️🎃👻 ✨</div>
+            <p class="final-desc">Ты сокрушил злые чары и спас этот мир от вечной тьмы!</p>
+            <p class="final-subtext">Отправляйся в <span class="highlight-dragon">Замок чудес</span> — там спрятан сундук с сокровищами.</p>
+            
+            <div class="final-artifact-wrapper">
+                <div class="ambient-glow"></div>
+                <div class="final-key-card">
+                    <div class="key-card-header">✦ КЛЮЧ ОТ СУНДУКА ✦</div>
+                    <div class="key-digits">394</div>
+                    <div class="key-card-footer">Твой магический код</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 5px;">
+                <div class="final-treasure-hint">
+                    <span>🗝️</span>
+                    <span>Назови этот код хранителям Замка</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Модалка ввода имени -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <h2>Как тебя зовут, путник?</h2>
+            <input type="text" id="name-input" placeholder="Введите свое имя..." autocomplete="off">
+            <button class="submit-btn" id="submit-btn">Войти в портал</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const screen1 = document.getElementById('screen-1');
+            const portalBtn = document.getElementById('portal-btn');
+            const mainTitle = document.getElementById('main-title');
+            const welcomeMessage = document.getElementById('welcome-message');
+            
+            const modalOverlay = document.getElementById('modal-overlay');
+            const nameInput = document.getElementById('name-input');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            const screen2 = document.getElementById('screen-2');
+            const questGreeting = document.getElementById('quest-greeting');
+            const screen3 = document.getElementById('screen-3');
+            const screen4 = document.getElementById('screen-4');
+            const screen5 = document.getElementById('screen-5');
+            const screen6 = document.getElementById('screen-6');
+            const screen7 = document.getElementById('screen-7');
+
+            // --- КОНФИГУРАЦИЯ ФОНОВ ---
+            const initialBgUrl = 'https://avatars.mds.yandex.net/i?id=33313e68be816b893fe9c763c05c6f30_l-5590942-images-thumbs&n=13';
+            
+            const questBackgrounds = [
+                'https://i.pinimg.com/1200x/4b/a3/80/4ba38082fed69b9ace7db1786c09b572.jpg',
+                'https://i.pinimg.com/originals/d7/a4/05/d7a405ee7b1844a98152cbc0b086b326.jpg?nii=t',
+                'https://i.pinimg.com/originals/3c/21/2b/3c212b6a56c9f6064aa4b1e28fdd73cf.jpg?nii=t',
+                'https://i.pinimg.com/originals/d0/a3/6b/d0a36b89757d11eae4d8cf462e125737.jpg',
+                'https://i.pinimg.com/originals/4e/be/b2/4ebeb235064e8c950bf1eb21f4829b23.jpg',
+                'https://i.pinimg.com/originals/2b/a4/93/2ba493480e3a6183dce99e0f39facdd8.jpg'
+            ];
+
+            // Предварительная загрузка картинок для мгновенного появления без задержек
+            [initialBgUrl, ...questBackgrounds].forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+
+            const bgLayerA = document.getElementById('bg-layer-a');
+            const bgLayerB = document.getElementById('bg-layer-b');
+            let currentActiveBg = bgLayerA;
+
+            // Устанавливаем стартовый фон
+            bgLayerA.style.backgroundImage = `linear-gradient(rgba(11, 12, 16, 0.45), rgba(20, 5, 30, 0.65)), url('${initialBgUrl}')`;
+
+            // Функция плавного кроссфейда фона
+            function switchBackground(imageUrl) {
+                const nextBg = (currentActiveBg === bgLayerA) ? bgLayerB : bgLayerA;
+                nextBg.style.backgroundImage = `linear-gradient(rgba(11, 12, 16, 0.45), rgba(20, 5, 30, 0.65)), url('${imageUrl}')`;
+                nextBg.classList.add('active');
+                currentActiveBg.classList.remove('active');
+                currentActiveBg = nextBg;
+            }
+
+            // Порядок экранов для циклического распределения картинок
+            const screenOrder = [screen1, screen2, screen3, screen4, screen5, screen6, screen7];
+
+            // Переход между экранами с автоматической циклической сменой фона
+            function transitionBetweenScreens(hideScreen, showScreen) {
+                const targetIndex = screenOrder.indexOf(showScreen);
+                
+                if (targetIndex === 0) {
+                    switchBackground(initialBgUrl);
+                } else if (targetIndex > 0) {
+                    // Зацикливание картинок, если экранов больше, чем картинок
+                    const bgUrl = questBackgrounds[(targetIndex - 1) % questBackgrounds.length];
+                    switchBackground(bgUrl);
+                }
+
+                hideScreen.style.opacity = '0';
+                setTimeout(() => {
+                    hideScreen.style.display = 'none';
+                    showScreen.style.display = 'block';
+                    setTimeout(() => showScreen.style.opacity = '1', 50);
+                }, 500);
+            }
+
+            // Проверка сохранения
+            const savedName = sessionStorage.getItem('halloweenPlayerName');
+            const quest1Passed = sessionStorage.getItem('halloweenQuest1Passed');
+            const quest2Passed = sessionStorage.getItem('halloweenQuest2Passed');
+            const quest3Passed = sessionStorage.getItem('halloweenQuest3Passed');
+            const quest4Passed = sessionStorage.getItem('halloweenQuest4Passed');
+            const quest5Passed = sessionStorage.getItem('halloweenQuest5Passed');
+            
+            if (savedName) {
+                portalBtn.innerText = "✨ Продолжить квест ✨";
+            }
+
+            // Обработка кнопки ВХОД
+            portalBtn.addEventListener('click', () => {
+                if (savedName) {
+                    if (quest5Passed === 'true') { transitionBetweenScreens(screen1, screen7); }
+                    else if (quest4Passed === 'true') { transitionBetweenScreens(screen1, screen6); }
+                    else if (quest3Passed === 'true') { transitionBetweenScreens(screen1, screen5); }
+                    else if (quest2Passed === 'true') { transitionBetweenScreens(screen1, screen4); }
+                    else if (quest1Passed === 'true') { transitionBetweenScreens(screen1, screen3); }
+                    else {
+                        questGreeting.innerText = `Привет, ${savedName}!`;
+                        transitionBetweenScreens(screen1, screen2);
+                    }
+                } else {
+                    modalOverlay.classList.add('active');
+                    nameInput.focus();
+                }
+            });
+
+            // Закрытие модалки
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) modalOverlay.classList.remove('active');
+            });
+
+            submitBtn.addEventListener('click', processEntry);
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') { processEntry(); nameInput.blur(); }
+            });
+
+            function processEntry() {
+                const playerName = nameInput.value.trim();
+                if (playerName === '') {
+                    nameInput.classList.add('error-shake');
+                    setTimeout(() => nameInput.classList.remove('error-shake'), 400);
+                } else {
+                    sessionStorage.setItem('halloweenPlayerName', playerName);
+                    modalOverlay.classList.remove('active');
+                    
+                    portalBtn.style.opacity = '0';
+                    setTimeout(() => {
+                        portalBtn.style.display = 'none';
+                        mainTitle.innerHTML = `Приветствуем в портале, <br><span style="color: #ff6a00;">${playerName}</span>!`;
+                        welcomeMessage.innerText = "Магия переносит тебя...";
+                        welcomeMessage.style.display = "block";
+                        
+                        questGreeting.innerText = `Привет, ${playerName}!`;
+                        setTimeout(() => transitionBetweenScreens(screen1, screen2), 1500);
+                    }, 300);
+                }
+            }
+
+            // Логика проверки заданий
+            function setupQuestLogic(inputID, btnID, errorID, areaID, successID, nextBtnID, answerWord, sessionKey, nextScreen) {
+                const input = document.getElementById(inputID);
+                const checkBtn = document.getElementById(btnID);
+                const errorText = document.getElementById(errorID);
+                const area = document.getElementById(areaID);
+                const successBlock = document.getElementById(successID);
+                const nextBtn = document.getElementById(nextBtnID);
+
+                function doCheck() {
+                    const answer = input.value.trim().toLowerCase();
+                    if (answer === answerWord) {
+                        errorText.style.display = 'none';
+                        area.style.display = 'none';
+                        successBlock.style.display = 'block';
+                        sessionStorage.setItem(sessionKey, 'true');
+                    } else {
+                        input.classList.add('error-shake');
+                        errorText.style.display = 'block';
+                        setTimeout(() => input.classList.remove('error-shake'), 400);
+                    }
+                }
+
+                checkBtn.addEventListener('click', doCheck);
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') { doCheck(); input.blur(); }
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    transitionBetweenScreens(input.closest('.quest-screen'), nextScreen);
+                });
+            }
+
+            // Инициализация квестов
+            setupQuestLogic('answer-input-1', 'check-answer-btn-1', 'error-text-1', 'q1-input-area', 'success-block-1', 'next-btn-1', 'добро', 'halloweenQuest1Passed', screen3);
+            setupQuestLogic('answer-input-2', 'check-answer-btn-2', 'error-text-2', 'q2-input-area', 'success-block-2', 'next-btn-2', 'сияние', 'halloweenQuest2Passed', screen4);
+            setupQuestLogic('answer-input-3', 'check-answer-btn-3', 'error-text-3', 'q3-input-area', 'success-block-3', 'next-btn-3', 'улыбка', 'halloweenQuest3Passed', screen5);
+            setupQuestLogic('answer-input-4', 'check-answer-btn-4', 'error-text-4', 'q4-input-area', 'success-block-4', 'next-btn-4', 'любовь', 'halloweenQuest4Passed', screen6);
+            setupQuestLogic('answer-input-5', 'check-answer-btn-5', 'error-text-5', 'q5-input-area', 'success-block-5', 'next-btn-5', 'мечта', 'halloweenQuest5Passed', screen7);
+
+        });
+    </script>
+</body>
+</html>
