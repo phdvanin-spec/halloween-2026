@@ -22,6 +22,7 @@
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
             height: 100vh; 
+            width: 100vw;
             display: flex; 
             justify-content: center; 
             align-items: center;
@@ -55,16 +56,32 @@
             padding: 20px; 
             width: 100%; 
             max-width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         /* --- ЭКРАН 1 (Стартовый) --- */
-        #screen-1 { transition: opacity 0.5s ease; }
+        #screen-1 { 
+            transition: opacity 0.5s ease;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
         h1 {
             font-family: 'Amatic SC', cursive; font-size: clamp(3.5rem, 10vw, 6rem);
-            letter-spacing: 3px; margin-bottom: clamp(1.5rem, 5vw, 3rem); color: #fff;
+            letter-spacing: 3px; 
+            margin-right: -3px; /* Компенсация letter-spacing для идеального центра */
+            margin-bottom: clamp(1.5rem, 5vw, 3rem); color: #fff;
             text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
             animation: float 3s ease-in-out infinite; line-height: 1.1;
+            text-align: center;
+            width: 100%;
         }
 
         @keyframes float {
@@ -105,6 +122,7 @@
             white-space: nowrap;
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin: 0 auto;
         }
         .portal-btn:hover {
             transform: scale(1.05);
@@ -126,12 +144,14 @@
             cursor: pointer;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             box-shadow: 0 0 25px rgba(0, 255, 170, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             animation: gradientMove 3s ease infinite;
+            margin: 0 auto;
         }
         .quest-next-btn .arrow-glyph {
             font-size: 1.3rem; transition: transform 0.3s ease; color: #00ffaa; text-shadow: 0 0 8px #00ffaa;
@@ -224,15 +244,18 @@
             border: 2px solid rgba(178, 0, 255, 0.45);
             box-shadow: 0 0 35px rgba(178, 0, 255, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.05);
             max-height: 90vh; overflow-y: auto;
+            width: 100%;
         }
 
         .quest-title {
             font-family: 'Amatic SC', cursive; font-size: clamp(2.5rem, 8vw, 4rem);
             color: #fff; margin-bottom: 20px; text-shadow: 0 0 15px var(--primary-glow); line-height: 1;
+            text-align: center;
         }
 
         .quest-text {
             font-size: clamp(1.1rem, 3vw, 1.3rem); line-height: 1.4; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
         }
 
         /* Цветовые акценты */
@@ -242,9 +265,9 @@
         .highlight-mirror { color: #e0f7fa; font-weight: bold; text-shadow: 0 0 10px rgba(224, 247, 250, 0.8); font-size: 1.1em; }
         .highlight-dragon { color: #ffb300; font-weight: bold; text-shadow: 0 0 10px rgba(255, 179, 0, 0.8); font-size: 1.1em; }
 
-        .error-text { color: #ff0055; font-weight: bold; display: none; margin-top: 14px; animation: shake 0.4s; }
-        .success-block { display: none; margin-top: 25px; animation: fadeIn 0.5s; }
-        .success-text { color: #00ffaa; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 10px #00ffaa; }
+        .error-text { color: #ff0055; font-weight: bold; display: none; margin-top: 14px; animation: shake 0.4s; text-align: center; }
+        .success-block { display: none; margin-top: 25px; animation: fadeIn 0.5s; text-align: center; }
+        .success-text { color: #00ffaa; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 10px #00ffaa; text-align: center; }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
@@ -291,6 +314,7 @@
             font-size: clamp(1.4rem, 4.5vw, 1.8rem);
             margin-bottom: 12px;
             letter-spacing: 8px;
+            margin-right: -8px; /* Компенсация отступа справа */
             filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
             animation: pulseGlow 2s infinite alternate;
         }
@@ -348,12 +372,14 @@
             box-shadow: 0 0 35px rgba(255, 106, 0, 0.4), inset 0 0 25px rgba(255, 215, 0, 0.15);
             min-width: 280px;
             max-width: 90vw;
+            margin: 0 auto;
         }
 
         .key-card-header {
             font-size: 0.85rem;
             font-weight: 800;
             letter-spacing: 3px;
+            margin-right: -3px;
             color: #ffd700;
             text-transform: uppercase;
             text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
@@ -366,17 +392,20 @@
             font-size: clamp(4.8rem, 16vw, 7rem);
             line-height: 1.05;
             letter-spacing: 6px;
+            margin-right: -6px;
             background: linear-gradient(180deg, #ffffff 0%, #fff0b8 40%, #ff9d00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 20px rgba(255, 179, 0, 0.7)) drop-shadow(0 0 40px rgba(255, 106, 0, 0.5));
-            margin: 6px 0 10px 0;
+            margin-top: 6px;
+            margin-bottom: 10px;
         }
 
         .key-card-footer {
             font-size: 0.9rem;
             color: #00ffaa;
             letter-spacing: 2px;
+            margin-right: -2px;
             text-transform: uppercase;
             font-weight: 800;
             text-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
@@ -394,41 +423,243 @@
             padding: 10px 24px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.15);
+            margin: 0 auto;
         }
 
-        /* --- ВСПЛЫВАЮЩЕЕ ОКНО --- */
+        /* --- ВСПЛЫВАЮЩЕЕ ОКНО (В едином стиле квеста) --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(8, 4, 18, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 10; padding: 15px;
         }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
+        
         .modal-box {
-            background: rgba(24, 10, 42, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid var(--primary-glow); border-radius: 24px; padding: clamp(25px, 6vw, 40px);
-            text-align: center; width: 100%; max-width: 450px;
-            box-shadow: 0 0 35px rgba(255, 106, 0, 0.45), inset 0 0 20px rgba(178, 0, 255, 0.2);
-            transform: translateY(50px); transition: transform 0.4s ease;
+            position: relative;
+            background: rgba(20, 9, 36, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 106, 0, 0.7);
+            border-radius: 28px; 
+            padding: clamp(28px, 6vw, 44px) clamp(20px, 5vw, 36px);
+            text-align: center; 
+            width: 100%; 
+            max-width: 460px;
+            box-shadow: 0 0 45px rgba(255, 106, 0, 0.45), 0 0 30px rgba(178, 0, 255, 0.35), inset 0 0 20px rgba(255, 215, 0, 0.12);
+            transform: translateY(40px) scale(0.95); 
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            margin: auto;
         }
-        .modal-overlay.active .modal-box { transform: translateY(0); }
-        .modal-box h2 { font-family: 'Amatic SC', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: #fff; margin-bottom: 25px; text-shadow: 0 0 10px var(--secondary-glow); }
-        .modal-box input {
-            width: 100%; padding: 15px; font-size: 1.2rem; font-family: 'Nunito', sans-serif;
-            border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 12px;
-            background: rgba(0, 0, 0, 0.45); color: white; outline: none; margin-bottom: 20px; text-align: center; transition: all 0.3s;
+        .modal-overlay.active .modal-box { 
+            transform: translateY(0) scale(1); 
         }
-        .modal-box input:focus { border-color: var(--primary-glow); box-shadow: 0 0 15px var(--primary-glow); }
-        .submit-btn {
-            background: transparent; border: 2px solid var(--primary-glow); color: white; font-size: 1.2rem; padding: 12px 30px;
-            border-radius: 12px; cursor: pointer; transition: all 0.3s; font-family: 'Nunito', sans-serif; font-weight: bold; width: 100%; max-width: 250px;
-        }
-        .submit-btn:hover { background: var(--primary-glow); box-shadow: 0 0 20px var(--primary-glow); }
 
-        #welcome-message { display: none; font-size: clamp(1.2rem, 4vw, 1.6rem); color: #00ffaa; text-shadow: 0 0 10px #00ffaa; margin-top: 20px; }
+        .modal-badge {
+            display: inline-block;
+            background: rgba(255, 106, 0, 0.15);
+            border: 1px solid rgba(255, 106, 0, 0.6);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffaa00;
+            text-shadow: 0 0 8px rgba(255, 170, 0, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .modal-box h2 { 
+            font-family: 'Amatic SC', cursive; 
+            font-size: clamp(2.6rem, 8vw, 3.8rem); 
+            color: #fff; 
+            margin-bottom: 22px; 
+            line-height: 1.05;
+            text-shadow: 0 0 10px var(--primary-glow), 0 0 25px var(--secondary-glow); 
+        }
+
+        .modal-box input {
+            width: 100%; 
+            max-width: 360px;
+            padding: 15px 24px; 
+            font-size: 1.2rem; 
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            border: 2px solid rgba(178, 0, 255, 0.55); 
+            border-radius: 50px;
+            background: rgba(10, 4, 20, 0.7); 
+            color: #ffffff; 
+            outline: none; 
+            margin: 0 auto 20px auto; 
+            display: block;
+            text-align: center; 
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6), 0 0 15px rgba(178, 0, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+        .modal-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+        }
+        .modal-box input:focus { 
+            border-color: #00ffaa; 
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6a00, #ff0055, #b200ff);
+            background-size: 200% 200%;
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            color: white; 
+            font-size: 1.15rem; 
+            padding: 14px 34px;
+            border-radius: 50px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-family: 'Nunito', sans-serif; 
+            font-weight: 800; 
+            width: 100%; 
+            max-width: 300px;
+            margin: 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.6);
+            animation: gradientMove 3s ease infinite;
+        }
+        .submit-btn:hover { 
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 35px rgba(178, 0, 255, 0.9), 0 0 20px var(--primary-glow);
+            border-color: #fff;
+        }
+        .submit-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* --- МАГИЧЕСКИЙ БЛОК ЗАГРУЗКИ / ПОРТАЛА ПЕРЕМЕЩЕНИЯ --- */
+        #welcome-message { 
+            display: none; 
+            margin: 30px auto 0 auto; 
+            width: 100%;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .portal-loader-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Вихревой портальный спиннер */
+        .portal-spinner {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .portal-spinner .spinner-ring {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .portal-spinner .ring-1 {
+            border-top: 3px solid var(--primary-glow);
+            border-right: 3px solid var(--secondary-glow);
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+            animation: spinFast 1.4s linear infinite;
+        }
+
+        .portal-spinner .ring-2 {
+            top: 12px; left: 12px;
+            width: 52px; height: 52px;
+            border-bottom: 3px solid var(--emerald-glow);
+            border-left: 3px solid #ff0055;
+            filter: drop-shadow(0 0 12px var(--emerald-glow));
+            animation: spinReverse 1s linear infinite;
+        }
+
+        .portal-spinner .spinner-core {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffffff 10%, #ff6a00 60%, transparent 100%);
+            box-shadow: 0 0 16px #ff6a00, 0 0 30px #b200ff;
+            animation: pulseCore 1.3s ease-in-out infinite;
+        }
+
+        @keyframes spinFast {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinReverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes pulseCore {
+            0%, 100% { transform: scale(0.85); opacity: 0.7; }
+            50% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 12px #00ffaa); }
+        }
+
+        /* Текст перемещения строго по центру */
+        .portal-transfer-text {
+            font-size: clamp(1.2rem, 4vw, 1.65rem);
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff6a00, #ff0077, #b200ff, #00ffaa, #ff6a00);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 3s linear infinite;
+            filter: drop-shadow(0 0 12px rgba(0, 255, 170, 0.45));
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Бегающие магические точки */
+        .portal-dots {
+            display: inline-block;
+            margin-left: 2px;
+            -webkit-text-fill-color: #00ffaa;
+            text-shadow: 0 0 8px #00ffaa;
+        }
+
+        .portal-dots span {
+            display: inline-block;
+            animation: blinkDots 1.4s infinite ease-in-out both;
+        }
+        .portal-dots span:nth-child(1) { animation-delay: 0.15s; }
+        .portal-dots span:nth-child(2) { animation-delay: 0.3s; }
+        .portal-dots span:nth-child(3) { animation-delay: 0.45s; }
+
+        @keyframes blinkDots {
+            0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+            40% { opacity: 1; transform: translateY(-4px); }
+        }
     </style>
 </head>
 <body>
@@ -441,25 +672,51 @@
         
         <!-- ЭКРАН 1: Вход -->
         <div id="screen-1">
-            <h1 id="main-title">Halloween Челлендж 2026</h1>
+            <h1 id="main-title">Halloween Челлендж 🎃 2026</h1>
             <button class="magic-element portal-btn" id="portal-btn">✨ Вход в волшебный портал ✨</button>
-            <div id="welcome-message"></div>
+            <div id="welcome-message">
+                <div class="portal-loader-wrapper">
+                    <div class="portal-spinner">
+                        <div class="spinner-ring ring-1"></div>
+                        <div class="spinner-ring ring-2"></div>
+                        <div class="spinner-core"></div>
+                    </div>
+                    <div class="portal-transfer-text">
+                        <span>Магия переносит тебя</span>
+                        <span class="portal-dots"><span>.</span><span>.</span><span>.</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН ПОДГОТОВКИ (Выбор наряда с эмодзи) -->
+        <div id="screen-wardrobe" class="quest-screen">
+            <h2 class="quest-title" id="wardrobe-greeting">Магическая подготовка 🧙‍♂️✨</h2>
+            <p class="quest-text">Все вокруг заколдовал злой <span class="highlight-danger">Гоблинус 👹🧌</span>! Тебе нужно расколдовать его чары 🔮. Для этого пройди все испытания и отгадай древние загадки 📜✨.</p>
+            <p class="quest-text">Но перед тем как приступить к заданиям, загляни в шкаф 🚪 и выбери наряд для себя 🧥🎭.</p>
+            <p class="quest-text">Нужно сделать так, чтобы <span class="highlight-danger">Гоблинус 👹</span> и другие жуткие обитатели заколдованного мира не смогли тебя распознать 👀🤫.</p>
+            <p class="quest-text" style="margin-top: 15px; margin-bottom: 25px;">Нажми <strong>«Продолжить»</strong>, когда наряд будет на тебе! 🧛‍♂️✨</p>
+            
+            <button class="quest-next-btn" id="wardrobe-continue-btn">
+                <span>Продолжить ✦ 🚪</span>
+                <span class="arrow-glyph">➔</span>
+            </button>
         </div>
 
         <!-- ЭКРАН 2: Задание 1 -->
         <div id="screen-2" class="quest-screen">
-            <h2 class="quest-title" id="quest-greeting">Привет, Имя!</h2>
-            <p class="quest-text">Все вокруг заколдовал злой Гоблинус. Тебе нужно расколдовать его чары. Для этого пройди все испытания и отгадай все загадки.</p>
-            <p class="quest-text">Направляйся в <span class="highlight">княжество Обедов</span>. Ты найдёшь там первое задание. Разгадай его и ответ запиши вот сюда ниже:</p>
+            <h2 class="quest-title" id="quest-greeting">Привет... Эээ. Имя - это ты?! 🥸🎭</h2>
+            <p class="quest-text">Отлично! Тебя совсем не узнать 🤫. Теперь ты точно готов к опасным приключениям! 🎒🗺️</p>
+            <p class="quest-text">Направляйся в <span class="highlight">княжество Обедов 🍽️🍲</span>. Ты найдёшь там первое задание 📜. Разгадай его и ответ запиши вот сюда ниже ✍️:</p>
             
-            <div id="q1-input-area">
+            <div id="q1-input-area" style="text-align: center;">
                 <input type="text" id="answer-input-1" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
                 <button class="answer-btn" id="check-answer-btn-1">✨ Отправить ответ ✦</button>
-                <p class="error-text" id="error-text-1">Неверно! Подумай ещё...</p>
+                <p class="error-text" id="error-text-1">Неверно! Подумай ещё... 🤔💭</p>
             </div>
 
             <div id="success-block-1" class="success-block">
-                <p class="success-text">Молодец! Так держать!</p>
+                <p class="success-text">Молодец! Так держать! 🌟🎉</p>
                 <button class="quest-next-btn" id="next-btn-1">
                     <span>К следующей тайне ✦ 🔮</span>
                     <span class="arrow-glyph">➔</span>
@@ -469,19 +726,19 @@
 
         <!-- ЭКРАН 3: Задание 2 -->
         <div id="screen-3" class="quest-screen">
-            <h2 class="quest-title">Испытание второе</h2>
-            <p class="quest-text">Поздравляю! Ты прошел первое испытание! Но дальше будет страшнее.</p>
-            <p class="quest-text">Поэтому сейчас непременно направляйся в <span class="highlight-danger">обитель нечисти</span>. Берегись, иногда там плохо пахнет и раздаются странные звуки... 👻</p>
-            <p class="quest-text">Направляйся туда и оставь всё лишнее. А ещё там ты найдёшь ответ на второе задание.</p>
+            <h2 class="quest-title">Испытание второе 🕸️🦇</h2>
+            <p class="quest-text">Поздравляю! Ты прошел первое испытание! 👏 Но дальше будет страшнее... 😈</p>
+            <p class="quest-text">Поэтому сейчас непременно направляйся в <span class="highlight-danger">обитель нечисти 🕷️</span>. Берегись, иногда там плохо пахнет и раздаются странные звуки...💨</p>
+            <p class="quest-text">Направляйся туда и оставь всё лишнее 🚽🧻. А ещё там ты найдёшь ответ на второе задание 🗝️👀.</p>
             
-            <div id="q2-input-area">
+            <div id="q2-input-area" style="text-align: center;">
                 <input type="text" id="answer-input-2" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
                 <button class="answer-btn" id="check-answer-btn-2">✨ Отправить ответ ✦</button>
-                <p class="error-text" id="error-text-2">Ой, что-то не так. Ищи лучше!</p>
+                <p class="error-text" id="error-text-2">Ой, что-то не так. Ищи лучше! 🔍😬</p>
             </div>
 
             <div id="success-block-2" class="success-block">
-                <p class="success-text">Невероятно! Ты справился с нечистью!</p>
+                <p class="success-text">Невероятно! Ты справился с нечистью! ⚡🛡️</p>
                 <button class="quest-next-btn" id="next-btn-2">
                     <span>Шагнуть во тьму ✦ 🕯️</span>
                     <span class="arrow-glyph">➔</span>
@@ -491,18 +748,19 @@
 
         <!-- ЭКРАН 4: Задание 3 -->
         <div id="screen-4" class="quest-screen">
-            <h2 class="quest-title">Царство водяного</h2>
-            <p class="quest-text">Ты отлично справляешься. Теперь следующее задание!</p>
-            <p class="quest-text">В <span class="highlight-water">царстве водяного 🌊</span> тебе нужно найти <span class="highlight-danger">шифр Дракулы</span> и с помощью этого шифра разгадать секретное послание.</p>
-            
-            <div id="q3-input-area">
+            <h2 class="quest-title">Царство водяного 🧜‍♂️🫧</h2>
+            <p class="quest-text">Ты отлично справляешься! 👏 Теперь следующее задание 📜:</p>
+            <p class="quest-text">В <span class="highlight-water">царстве водяного 🌊💧</span> тебе нужно найти <span class="highlight-danger">шифр Дракулы 🧛‍♂️</span> и с помощью этого шифра разгадать секретное послание 🔐✨.</p>
+             <p class="quest-text">Кстати, не забудь помыть руки 🧼🫧 после 🚽...</p>
+
+            <div id="q3-input-area" style="text-align: center;">
                 <input type="text" id="answer-input-3" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
                 <button class="answer-btn" id="check-answer-btn-3">✨ Отправить ответ ✦</button>
-                <p class="error-text" id="error-text-3">Шифр не поддаётся! Попробуй разгадать ещё раз.</p>
+                <p class="error-text" id="error-text-3">Шифр не поддаётся! Попробуй разгадать ещё раз 🧩❌.</p>
             </div>
 
             <div id="success-block-3" class="success-block">
-                <p class="success-text">Гениально! Послание разгадано!</p>
+                <p class="success-text">Гениально! Послание разгадано! 📜🔓✨</p>
                 <button class="quest-next-btn" id="next-btn-3">
                     <span>В Зазеркалье ✦ 🪞</span>
                     <span class="arrow-glyph">➔</span>
@@ -512,18 +770,18 @@
 
         <!-- ЭКРАН 5: Задание 4 -->
         <div id="screen-5" class="quest-screen">
-            <h2 class="quest-title">Зазеркалье</h2>
-            <p class="quest-text">Отправляйся в <span class="highlight-mirror">страну зеркал ✨</span>. В этот раз тебе придётся потрудиться и поискать секретное послание, а после того как найдёшь — подумать, как его разгадать.</p>
-            <p class="quest-text">В этом тебе поможет волшебный фонарик. Послание ты разглядишь в Зазеркалье.</p>
+            <h2 class="quest-title">Зазеркалье 🪞🔮</h2>
+            <p class="quest-text">Отправляйся в <span class="highlight-mirror">страну зеркал ✨🪞</span>. В этот раз тебе придётся потрудиться и поискать тайное послание 📜🔍, а после того как найдёшь — подумать, как его разгадать 🧠💡.</p>
+            <p class="quest-text">В этом тебе поможет волшебный фонарик 🔦⚡. Послание ты разглядишь в глубинах Зазеркалья 🌌👁️.</p>
             
-            <div id="q4-input-area">
+            <div id="q4-input-area" style="text-align: center;">
                 <input type="text" id="answer-input-4" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
                 <button class="answer-btn" id="check-answer-btn-4">✨ Отправить ответ ✦</button>
-                <p class="error-text" id="error-text-4">Зеркало молчит. Попробуй другое слово!</p>
+                <p class="error-text" id="error-text-4">Зеркало молчит... Попробуй другое слово! 🪞🤫</p>
             </div>
 
             <div id="success-block-4" class="success-block">
-                <p class="success-text">Великолепно! Ты раскрыл секрет зеркал!</p>
+                <p class="success-text">Великолепно! Ты раскрыл секрет зеркал! 🪞✨🌟</p>
                 <button class="quest-next-btn" id="next-btn-4">
                     <span>В логово дракона ✦ 🐉</span>
                     <span class="arrow-glyph">➔</span>
@@ -533,19 +791,19 @@
 
         <!-- ЭКРАН 6: Задание 5 -->
         <div id="screen-6" class="quest-screen">
-            <h2 class="quest-title">Пещера дракона</h2>
-            <p class="quest-text">Ты почти у финиша! Отправляйся в <span class="highlight-dragon">пещеру дракона 🐉</span>. </p>
-            <p class="quest-text">Но не волнуйся, он добрый и спит, но его сон стерегут привидения. Вот они-то и будут возмущаться и шуметь, потому что ты отправляешься на охоту.</p>
-            <p class="quest-text">Это будет самая настоящая <span class="highlight">охота за привидениями 👻</span>!</p>
+            <h2 class="quest-title">Пещера дракона 🐉🌋</h2>
+            <p class="quest-text">Ты почти у финиша! 🏁 Отправляйся в <span class="highlight-dragon">пещеру дракона 🐉🔥</span>.</p>
+            <p class="quest-text">Но не волнуйся, он добрый и крепко спит 😴💤, но его сон стерегут привидения 👻. Вот они-то и будут возмущаться и шуметь 📢😱, потому что ты отправляешься на охоту!</p>
+            <p class="quest-text">Это будет самая настоящая <span class="highlight">охота за привидениями 👻🏹🕸️</span>!</p>
             
-            <div id="q5-input-area">
+            <div id="q5-input-area" style="text-align: center;">
                 <input type="text" id="answer-input-5" class="magic-element magic-input" placeholder="Твой ответ..." autocomplete="off">
                 <button class="answer-btn" id="check-answer-btn-5">✨ Отправить ответ ✦</button>
-                <p class="error-text" id="error-text-5">Привидения смеются! Ответ неверный.</p>
+                <p class="error-text" id="error-text-5">Привидения смеются! Ответ неверный 👻🤭❌.</p>
             </div>
 
             <div id="success-block-5" class="success-block">
-                <p class="success-text">Ура! Все привидения пойманы!</p>
+                <p class="success-text">Ура! Все привидения пойманы! 👻🎯🎉</p>
                 <button class="quest-next-btn" id="next-btn-5">
                     <span>Открыть Замок Чудес ✦ 🗝️</span>
                     <span class="arrow-glyph">➔</span>
@@ -583,9 +841,10 @@
     <!-- Модалка ввода имени -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-box">
+            <div class="modal-badge">✦ ВОЛШЕБНЫЙ ПОРТАЛ ✦</div>
             <h2>Как тебя зовут, путник?</h2>
             <input type="text" id="name-input" placeholder="Введите свое имя..." autocomplete="off">
-            <button class="submit-btn" id="submit-btn">Войти в портал</button>
+            <button class="submit-btn" id="submit-btn">✨ Войти в портал ✨</button>
         </div>
     </div>
 
@@ -600,6 +859,10 @@
             const nameInput = document.getElementById('name-input');
             const submitBtn = document.getElementById('submit-btn');
             
+            const screenWardrobe = document.getElementById('screen-wardrobe');
+            const wardrobeGreeting = document.getElementById('wardrobe-greeting');
+            const wardrobeContinueBtn = document.getElementById('wardrobe-continue-btn');
+
             const screen2 = document.getElementById('screen-2');
             const questGreeting = document.getElementById('quest-greeting');
             const screen3 = document.getElementById('screen-3');
@@ -620,7 +883,7 @@
                 'https://i.pinimg.com/originals/2b/a4/93/2ba493480e3a6183dce99e0f39facdd8.jpg'
             ];
 
-            // Предварительная загрузка картинок для мгновенного появления без задержек
+            // Предварительная загрузка картинок
             [initialBgUrl, ...questBackgrounds].forEach(url => {
                 const img = new Image();
                 img.src = url;
@@ -643,16 +906,15 @@
             }
 
             // Порядок экранов для циклического распределения картинок
-            const screenOrder = [screen1, screen2, screen3, screen4, screen5, screen6, screen7];
+            const screenOrder = [screen1, screenWardrobe, screen2, screen3, screen4, screen5, screen6, screen7];
 
-            // Переход между экранами с автоматической циклической сменой фона
+            // Переход между экранами с автоматической сменой фона
             function transitionBetweenScreens(hideScreen, showScreen) {
                 const targetIndex = screenOrder.indexOf(showScreen);
                 
                 if (targetIndex === 0) {
                     switchBackground(initialBgUrl);
                 } else if (targetIndex > 0) {
-                    // Зацикливание картинок, если экранов больше, чем картинок
                     const bgUrl = questBackgrounds[(targetIndex - 1) % questBackgrounds.length];
                     switchBackground(bgUrl);
                 }
@@ -686,7 +948,7 @@
                     else if (quest2Passed === 'true') { transitionBetweenScreens(screen1, screen4); }
                     else if (quest1Passed === 'true') { transitionBetweenScreens(screen1, screen3); }
                     else {
-                        questGreeting.innerText = `Привет, ${savedName}!`;
+                        questGreeting.innerText = `Привет, ${savedName}! 🎭✨`;
                         transitionBetweenScreens(screen1, screen2);
                     }
                 } else {
@@ -695,7 +957,7 @@
                 }
             });
 
-            // Закрытие модалки
+            // Закрытие модалки при клике вне окна
             modalOverlay.addEventListener('click', (e) => {
                 if (e.target === modalOverlay) modalOverlay.classList.remove('active');
             });
@@ -717,15 +979,21 @@
                     portalBtn.style.opacity = '0';
                     setTimeout(() => {
                         portalBtn.style.display = 'none';
-                        mainTitle.innerHTML = `Приветствуем в портале, <br><span style="color: #ff6a00;">${playerName}</span>!`;
-                        welcomeMessage.innerText = "Магия переносит тебя...";
+                        mainTitle.innerHTML = `Приветствуем в портале, ${playerName}! 🔮`;
                         welcomeMessage.style.display = "block";
                         
-                        questGreeting.innerText = `Привет, ${playerName}!`;
-                        setTimeout(() => transitionBetweenScreens(screen1, screen2), 1500);
-                    }, 300);
+                        questGreeting.innerText = `Привет... Эээ🤔 ${playerName} - это ты!?`;
+                        
+                        // Переход на экран подготовки ровно через 10 секунд (10000 мс)
+                        setTimeout(() => transitionBetweenScreens(screen1, screenWardrobe), 10000);
+                    }, 500);
                 }
             }
+
+            // Переход со шкафа к первому заданию
+            wardrobeContinueBtn.addEventListener('click', () => {
+                transitionBetweenScreens(screenWardrobe, screen2);
+            });
 
             // Логика проверки заданий
             function setupQuestLogic(inputID, btnID, errorID, areaID, successID, nextBtnID, answerWord, sessionKey, nextScreen) {
